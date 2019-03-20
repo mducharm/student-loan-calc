@@ -2,10 +2,14 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="#">
-        <i class="fas fa-chart-bar has-text-success is-size-1"></i>
+        <h1 class="box logo is-size-3">$</h1>
+        <!-- <img src="@/assets/android-chrome-512x512.png" alt="Dollar Sign Logo"> -->
+        
+        
       </a>
       <div class="navbar-item">
         <h4 class="title is-4 logo-text">Student Loan Calculator</h4>
+        <!-- <i class="fas fa-chart-bar has-text-success is-size-1"></i> -->
       </div>
 
       <a
@@ -69,7 +73,14 @@ export default {
 </script>
 <style scoped>
 .logo {
-  color: green;
+  background-color: #4B8;
+  color: #FFF;
+  border-radius: 5px;
+  font-family: 'Leckerli One', cursive;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 .logo-text {
