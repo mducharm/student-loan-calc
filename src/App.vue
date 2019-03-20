@@ -8,11 +8,12 @@
 <script>
 import FormComponent from './components/FormComponent.vue'
 import NavbarComponent from './components/NavbarComponent.vue'
+import About from './components/About.vue'
 
 export default {
   name: 'app',
   components: {
-    FormComponent, NavbarComponent
+    FormComponent, NavbarComponent, About
   }
 }
 </script>

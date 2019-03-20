@@ -3,7 +3,22 @@
     <div class="field">
       <label class="label">How much are you borrowing?</label>
       <div class="control">
-        <input class="input" type="text" placeholder="Principal Balance">
+        <input class="input" type="text" placeholder="Principal Balance" v-model="principal">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">How many days until first/next payment?</label>
+      <p>
+        Remember: the interest of federal student loans accrues
+        <i>daily</i>. Add 30 days for a month, or 365 for a year.
+      </p>
+      <div class="control">
+        <input
+          class="input"
+          type="text"
+          placeholder="Days since last payment"
+          v-model="daysSincePayment"
+        >
       </div>
     </div>
 
@@ -42,6 +57,9 @@
         </div>
       </div>
     </div>
+
+    <!-- Results -->
+    <div>Your loans would accrue {{dailyInterestAmount}} per day. Over {{daysSincePayment}} days, your loans would accrue a total of {{totalInterestAmount}}.</div>
   </div>
 </template>
 
@@ -52,7 +70,9 @@ export default {
     return {
       programType: "",
       selectedUndergradLoan: "",
-      selectedGradLoan: ""
+      selectedGradLoan: "",
+      principal: 0,
+      daysSincePayment: 0
     };
   },
   computed: {
@@ -61,17 +81,26 @@ export default {
         this.programType === "Undergraduate" &&
         this.selectedUndergradLoan !== ""
       ) {
-        return .0505;
+        return 0.0505;
       } else if (
         this.programType === "Graduate" &&
         this.selectedGradLoan !== ""
       ) {
         if (this.selectedGradLoan === "Unsubsidized Loans") {
-          return .066
+          return 0.066;
         } else if (this.selectedGradLoan === "Graduate PLUS Loans") {
-          return .076
+          return 0.076;
         }
       }
+    },
+    interestRateFactor() {
+      return this.interestRate / 365;
+    },
+    dailyInterestAmount() {
+      return this.principal * this.interestRateFactor;
+    },
+    totalInterestAmount() {
+      return this.principal * this.interestRateFactor * this.daysSincePayment;
     }
   },
   methods: {}
