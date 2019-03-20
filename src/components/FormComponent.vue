@@ -5,7 +5,12 @@
       <div class="control">
         <input class="input" type="text" placeholder="Principal Balance" v-model="principal">
       </div>
-      <p class="help">Find the annual and lifetime borrowing limits <a href="https://studentaid.ed.gov/sa/types/loans/subsidized-unsubsidized#how-much">here</a>.</p>
+      <p class="help">
+        Find the annual and lifetime borrowing limits
+        <a
+          href="https://studentaid.ed.gov/sa/types/loans/subsidized-unsubsidized#how-much"
+        >here</a>.
+      </p>
     </div>
     <div class="field">
       <label class="label">How many days until first/next payment?</label>
@@ -23,47 +28,56 @@
       </div>
     </div>
 
-    <div class="field">
-      <label for="program-type" class="label">Program Type</label>
-      <div class="control">
-        <div class="select">
-          <select name="program-type" id="program-type" v-model="programType">
-            <option value="Undergraduate">Undergraduate</option>
-            <option value="Graduate">Graduate</option>
-          </select>
+    <div class="tile is-ancestor">
+      <div class="tile is-parent">
+        <div class="tile is-child">
+          <div class="field">
+            <label for="program-type" class="label">Program Type</label>
+            <div class="control">
+              <div class="select">
+                <select name="program-type" id="program-type" v-model="programType">
+                  <option value="Undergraduate">Undergraduate</option>
+                  <option value="Graduate">Graduate</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Undergrad loans dropdown -->
+          <div class="field" v-show="programType =='Undergraduate'">
+            <label for="undergrad-loans" class="label">Loan Type:</label>
+            <div class="control">
+              <div class="select">
+                <select name="undergrad-loans" id="undergrad-loans" v-model="selectedUndergradLoan">
+                  <option value="Subsidized Loans">Subsidized Loans</option>
+                  <option value="Unsubsidized Loans">Unsubsidized Loans</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Grad loans dropdown -->
+          <div class="field" v-show="programType =='Graduate'">
+            <label for="grad-loans" class="label">Loan Type:</label>
+            <div class="control">
+              <div class="select">
+                <select name="grad-loans" id="grad-loans" v-model="selectedGradLoan">
+                  <option value="Unsubsidized Loans">Unsubsidized Loans</option>
+                  <option value="Graduate PLUS Loans">Graduate PLUS Loans</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tile is-parent">
+        <div class="tile is-child">
+          <!-- Results -->
+          <div v-show="formComplete">
+            <p>Your loans would accrue {{dailyInterestAmount}} per day. Over {{daysSincePayment}} days, your loans would accrue a total of {{totalInterestAmount}}.</p>
+            <button class="button is-primary">Add to List</button>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Undergrad loans dropdown -->
-    <div class="field" v-show="programType =='Undergraduate'">
-      <label for="undergrad-loans" class="label">Loan Type:</label>
-      <div class="control">
-        <div class="select">
-          <select name="undergrad-loans" id="undergrad-loans" v-model="selectedUndergradLoan">
-            <option value="Subsidized Loans">Subsidized Loans</option>
-            <option value="Unsubsidized Loans">Unsubsidized Loans</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <!-- Grad loans dropdown -->
-    <div class="field" v-show="programType =='Graduate'">
-      <label for="grad-loans" class="label">Loan Type:</label>
-      <div class="control">
-        <div class="select">
-          <select name="grad-loans" id="grad-loans" v-model="selectedGradLoan">
-            <option value="Unsubsidized Loans">Unsubsidized Loans</option>
-            <option value="Graduate PLUS Loans">Graduate PLUS Loans</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <!-- Results -->
-    <div v-show="formComplete">Your loans would accrue {{dailyInterestAmount}} per day. Over {{daysSincePayment}} days, your loans would accrue a total of {{totalInterestAmount}}.
-      <button class="button is-primary">Add to List</button>
-    </div>
-    
   </form>
 </template>
 
@@ -89,8 +103,9 @@ export default {
       } else if (
         this.programType === "Graduate" &&
         this.selectedGradLoan !== ""
-      ) { return true } 
-      else {
+      ) {
+        return true;
+      } else {
         return false;
       }
     },
