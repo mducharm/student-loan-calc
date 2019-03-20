@@ -5,7 +5,7 @@
         <i class="fas fa-chart-bar has-text-success is-size-1"></i>
       </a>
       <div class="navbar-item">
-        <h4 class="title is-4">Student Loan Calculator</h4>
+        <h4 class="title is-4 logo-text">Student Loan Calculator</h4>
       </div>
 
       <a
@@ -70,5 +70,10 @@ export default {
 <style scoped>
 .logo {
   color: green;
+}
+
+.logo-text {
+  /* font-family: 'Fredoka One', cursive; */
+font-family: 'Fredericka the Great', cursive;
 }
 </style>

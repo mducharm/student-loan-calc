@@ -8,11 +8,36 @@
     </div>
 
     <div class="field">
-      <label for="loan-type" class="label">Loan Type:</label>
+      <label for="program-type" class="label">Program Type</label>
       <div class="control">
         <div class="select">
-          <select name="loan-type" id="loantype">
-            <option value="Unsubsidized Loans - 6.6%">Unsubsidized Loans - 6.6%</option>
+          <select name="program-type" id="program-type" v-model="programType">
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Graduate">Graduate</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <!-- Undergrad loans dropdown -->
+    <div class="field" v-show="programType =='Undergraduate'">
+      <label for="undergrad-loans" class="label">Loan Type:</label>
+      <div class="control">
+        <div class="select">
+          <select name="undergrad-loans" id="undergrad-loans" v-model="selectedUndergradLoan">
+            <option value="Subsidized Loans">Subsidized Loans</option>
+            <option value="Unsubsidized Loans">Unsubsidized Loans</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <!-- Grad loans dropdown -->
+    <div class="field" v-show="programType =='Graduate'">
+      <label for="grad-loans" class="label">Loan Type:</label>
+      <div class="control">
+        <div class="select">
+          <select name="grad-loans" id="grad-loans" v-model="selectedGradLoan">
+            <option value="Unsubsidized Loans">Unsubsidized Loans</option>
+            <option value="Graduate PLUS Loans">Graduate PLUS Loans</option>
           </select>
         </div>
       </div>
@@ -24,9 +49,33 @@
 export default {
   name: "FormComponent",
   data() {
-    return {};
-  }
-}
+    return {
+      programType: "",
+      selectedUndergradLoan: "",
+      selectedGradLoan: ""
+    };
+  },
+  computed: {
+    interestRate() {
+      if (
+        this.programType === "Undergraduate" &&
+        this.selectedUndergradLoan !== ""
+      ) {
+        return "5.05%";
+      } else if (
+        this.programType === "Graduate" &&
+        this.selectedGradLoan !== ""
+      ) {
+        if (this.selectedGradLoan === "Unsubsidized Loans") {
+          return "6.6%"
+        } else if (this.selectedGradLoan === "Graduate PLUS Loans") {
+          return "7.6%"
+        }
+      }
+    }
+  },
+  methods: {}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
