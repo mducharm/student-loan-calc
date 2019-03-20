@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <NavbarComponent />
-    <FormComponent />
+    <div class="columns">
+      <div class="column"><FormComponent /></div>
+      <div class="column"><LoanList /></div>
+    </div>
+    
   </div>
 </template>
 
@@ -9,11 +13,12 @@
 import FormComponent from './components/FormComponent.vue'
 import NavbarComponent from './components/NavbarComponent.vue'
 import About from './components/About.vue'
+import LoanList from './components/LoanList.vue'
 
 export default {
   name: 'app',
   components: {
-    FormComponent, NavbarComponent, About
+    FormComponent, NavbarComponent, About, LoanList
   }
 }
 </script>
@@ -27,4 +32,13 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 } */
+
+#app {
+  /* background-image: url("./assets/kim-gorga-540855-unsplash.jpg"); */
+  background-image: url("./assets/steve-johnson-605822-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+  min-height: 100vh;
+}
 </style>

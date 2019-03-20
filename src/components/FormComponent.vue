@@ -1,17 +1,14 @@
 <template>
-  <div>
+  <form class="box">
     <div class="field">
       <label class="label">How much are you borrowing?</label>
       <div class="control">
         <input class="input" type="text" placeholder="Principal Balance" v-model="principal">
       </div>
+      <p class="help">Find the annual and lifetime borrowing limits <a href="https://studentaid.ed.gov/sa/types/loans/subsidized-unsubsidized#how-much">here</a>.</p>
     </div>
     <div class="field">
       <label class="label">How many days until first/next payment?</label>
-      <p>
-        Remember: the interest of federal student loans accrues
-        <i>daily</i>. Add 30 days for a month, or 365 for a year.
-      </p>
       <div class="control">
         <input
           class="input"
@@ -19,6 +16,10 @@
           placeholder="Days since last payment"
           v-model="daysSincePayment"
         >
+        <p class="help">
+          Remember: the interest of federal student loans accrues
+          <i>daily</i>. Add 30 days for a month, or 365 for a year.
+        </p>
       </div>
     </div>
 
@@ -59,8 +60,11 @@
     </div>
 
     <!-- Results -->
-    <div>Your loans would accrue {{dailyInterestAmount}} per day. Over {{daysSincePayment}} days, your loans would accrue a total of {{totalInterestAmount}}.</div>
-  </div>
+    <div v-show="formComplete">Your loans would accrue {{dailyInterestAmount}} per day. Over {{daysSincePayment}} days, your loans would accrue a total of {{totalInterestAmount}}.
+      <button class="button is-primary">Add to List</button>
+    </div>
+    
+  </form>
 </template>
 
 <script>
@@ -76,6 +80,20 @@ export default {
     };
   },
   computed: {
+    formComplete() {
+      if (
+        this.programType === "Undergraduate" &&
+        this.selectedUndergradLoan !== ""
+      ) {
+        return true;
+      } else if (
+        this.programType === "Graduate" &&
+        this.selectedGradLoan !== ""
+      ) { return true } 
+      else {
+        return false;
+      }
+    },
     interestRate() {
       if (
         this.programType === "Undergraduate" &&
