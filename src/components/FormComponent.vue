@@ -61,15 +61,15 @@ export default {
         this.programType === "Undergraduate" &&
         this.selectedUndergradLoan !== ""
       ) {
-        return "5.05%";
+        return .0505;
       } else if (
         this.programType === "Graduate" &&
         this.selectedGradLoan !== ""
       ) {
         if (this.selectedGradLoan === "Unsubsidized Loans") {
-          return "6.6%"
+          return .066
         } else if (this.selectedGradLoan === "Graduate PLUS Loans") {
-          return "7.6%"
+          return .076
         }
       }
     }
