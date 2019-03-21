@@ -4,8 +4,11 @@
     <br>
     <div class="field">
       <label class="label">How much are you borrowing?</label>
-      <div class="control">
+      <div class="control has-icons-left">
         <input class="input" type="number" placeholder="Principal Balance" v-model="principal">
+        <span class="icon is-small is-left">
+          <i class="fas fa-dollar-sign"></i>
+        </span>
       </div>
       <p class="help">
         Find the annual and lifetime borrowing limits
@@ -45,45 +48,57 @@
             </div>
           </div>
           <!-- Undergrad loans dropdown -->
-          <div class="field" v-show="programType =='Undergraduate'">
-            <label for="undergrad-loans" class="label">Loan Type:</label>
-            <div class="control">
-              <div class="select">
-                <select name="undergrad-loans" id="undergrad-loans" v-model="selectedUndergradLoan">
-                  <option value="Subsidized Loan">Subsidized Loan</option>
-                  <option value="Unsubsidized Loan">Unsubsidized Loan</option>
-                </select>
+          <transition name="fade">
+            <div class="field" v-show="programType =='Undergraduate'">
+              <label for="undergrad-loans" class="label">Loan Type:</label>
+              <div class="control">
+                <div class="select">
+                  <select
+                    name="undergrad-loans"
+                    id="undergrad-loans"
+                    v-model="selectedUndergradLoan"
+                  >
+                    <option value="Subsidized Loan">Subsidized Loan</option>
+                    <option value="Unsubsidized Loan">Unsubsidized Loan</option>
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
+          </transition>
+
           <!-- Grad loans dropdown -->
-          <div class="field" v-show="programType =='Graduate'">
-            <label for="grad-loans" class="label">Loan Type:</label>
-            <div class="control">
-              <div class="select">
-                <select name="grad-loans" id="grad-loans" v-model="selectedGradLoan">
-                  <option value="Unsubsidized Loan">Unsubsidized Loan</option>
-                  <option value="Graduate PLUS Loan">Graduate PLUS Loan</option>
-                </select>
+          <transition name="fade">
+            <div class="field" v-show="programType =='Graduate'">
+              <label for="grad-loans" class="label">Loan Type:</label>
+              <div class="control">
+                <div class="select">
+                  <select name="grad-loans" id="grad-loans" v-model="selectedGradLoan">
+                    <option value="Unsubsidized Loan">Unsubsidized Loan</option>
+                    <option value="Graduate PLUS Loan">Graduate PLUS Loan</option>
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
+          </transition>
         </div>
       </div>
       <div class="tile is-parent is-vertical">
         <div class="tile is-child">
           <!-- Results -->
-          <div v-show="formComplete" class="box">
-            <p>At an interest rate of {{Math.round(interestRate * 10000)/100}}%, your loans would accrue ${{Math.round(dailyInterestAmount * 100) / 100}} per day.</p>
-            <br>
-            <p>Over {{daysSincePayment}} days, your loans would accrue a total of ${{Math.round(totalInterestAmount*100)/100}}.</p>
-          </div>
+          <transition name="fade">
+            <div v-show="formComplete" class="box">
+              <p>At an interest rate of {{Math.round(interestRate * 10000)/100}}%, your loans would accrue ${{Math.round(dailyInterestAmount * 100) / 100}} per day.</p>
+              <br>
+              <p>Over {{daysSincePayment}} days, your loans would accrue a total of ${{Math.round(totalInterestAmount*100)/100}}.</p>
+            </div>
+          </transition>
         </div>
-        <div v-show="formComplete" class="tile is-child">
+        <div class="tile is-child">
           <button
             type="button"
             class="button is-primary is-fullwidth"
             @click="submitLoan()"
+            :disabled="!formComplete"
           >Add to List</button>
         </div>
       </div>
@@ -105,7 +120,9 @@ export default {
   },
   computed: {
     formComplete() {
-      if (
+      if (this.principal == undefined || this.daysSincePayment == undefined) {
+        return false;
+      } else if (
         this.programType === "Undergraduate" &&
         this.selectedUndergradLoan !== ""
       ) {
@@ -179,5 +196,15 @@ export default {
 <style scoped>
 h1 {
   font-weight: bold;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
