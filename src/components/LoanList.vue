@@ -1,6 +1,7 @@
 <template>
   <div class="box">
-    <p>Add loans below to compare loans or estimate the cost of your degree.</p>
+    <h1>Compare Loans</h1>
+    <p>Estimate accrued interest and compare loans here.</p>
     <br>
 
     <div v-for="loan in loans" :key="loan">
@@ -63,4 +64,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+h1 {
+  font-weight: bold;
+}
 </style>

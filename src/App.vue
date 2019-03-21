@@ -3,10 +3,14 @@
     <NavbarComponent @about="aboutActive = true;"/>
     <div class="columns">
       <div class="column">
-        <FormComponent @loan-data="addLoanData($event)"/>
+        <transition name="fade">
+          <FormComponent @loan-data="addLoanData($event)"/>
+        </transition>
       </div>
       <div class="column">
-        <LoanList :loans="loans"/>
+        <transition name="fade">
+          <LoanList :loans="loans" v-show="showLoanList"/>
+        </transition>
       </div>
     </div>
     <About :class="{'is-active': aboutActive}" @close-about="aboutActive = false;"/>
@@ -32,6 +36,15 @@ export default {
       loans: [],
       aboutActive: false
     };
+  },
+  computed: {
+    showLoanList() {
+      if (this.loans.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
   methods: {
     addLoanData(loanData) {
@@ -59,5 +72,15 @@ export default {
   background-attachment: fixed;
   background-size: 100%;
   min-height: 100vh;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

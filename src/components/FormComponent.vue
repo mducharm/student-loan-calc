@@ -1,9 +1,11 @@
 <template>
   <form class="box">
+    <h1>Estimate Loan Interest</h1>
+    <br>
     <div class="field">
       <label class="label">How much are you borrowing?</label>
       <div class="control">
-        <input class="input" type="text" placeholder="Principal Balance" v-model="principal">
+        <input class="input" type="number" placeholder="Principal Balance" v-model="principal">
       </div>
       <p class="help">
         Find the annual and lifetime borrowing limits
@@ -17,7 +19,7 @@
       <div class="control">
         <input
           class="input"
-          type="text"
+          type="number"
           placeholder="Days since last payment"
           v-model="daysSincePayment"
         >
@@ -97,8 +99,8 @@ export default {
       programType: "",
       selectedUndergradLoan: "",
       selectedGradLoan: "",
-      principal: 0,
-      daysSincePayment: 0
+      principal: undefined,
+      daysSincePayment: undefined
     };
   },
   computed: {
@@ -175,4 +177,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+h1 {
+  font-weight: bold;
+}
 </style>
