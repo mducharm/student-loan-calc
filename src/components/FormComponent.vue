@@ -48,8 +48,8 @@
             <div class="control">
               <div class="select">
                 <select name="undergrad-loans" id="undergrad-loans" v-model="selectedUndergradLoan">
-                  <option value="Subsidized Loans">Subsidized Loans</option>
-                  <option value="Unsubsidized Loans">Unsubsidized Loans</option>
+                  <option value="Subsidized Loan">Subsidized Loan</option>
+                  <option value="Unsubsidized Loan">Unsubsidized Loan</option>
                 </select>
               </div>
             </div>
@@ -60,8 +60,8 @@
             <div class="control">
               <div class="select">
                 <select name="grad-loans" id="grad-loans" v-model="selectedGradLoan">
-                  <option value="Unsubsidized Loans">Unsubsidized Loans</option>
-                  <option value="Graduate PLUS Loans">Graduate PLUS Loans</option>
+                  <option value="Unsubsidized Loan">Unsubsidized Loan</option>
+                  <option value="Graduate PLUS Loan">Graduate PLUS Loan</option>
                 </select>
               </div>
             </div>
@@ -71,13 +71,18 @@
       <div class="tile is-parent is-vertical">
         <div class="tile is-child">
           <!-- Results -->
-          <div v-show="formComplete">
-            <p>At an interest rate of {{Math.round(interestRate * 1000)/10}}%, your loans would accrue ${{Math.round(dailyInterestAmount * 100) / 100}} per day.</p>
+          <div v-show="formComplete" class="box">
+            <p>At an interest rate of {{Math.round(interestRate * 10000)/100}}%, your loans would accrue ${{Math.round(dailyInterestAmount * 100) / 100}} per day.</p>
+            <br>
             <p>Over {{daysSincePayment}} days, your loans would accrue a total of ${{Math.round(totalInterestAmount*100)/100}}.</p>
           </div>
         </div>
         <div v-show="formComplete" class="tile is-child">
-          <button class="button is-primary">Add to List</button>
+          <button
+            type="button"
+            class="button is-primary is-fullwidth"
+            @click="submitLoan()"
+          >Add to List</button>
         </div>
       </div>
     </div>
@@ -122,9 +127,9 @@ export default {
         this.programType === "Graduate" &&
         this.selectedGradLoan !== ""
       ) {
-        if (this.selectedGradLoan === "Unsubsidized Loans") {
+        if (this.selectedGradLoan === "Unsubsidized Loan") {
           return 0.066;
-        } else if (this.selectedGradLoan === "Graduate PLUS Loans") {
+        } else if (this.selectedGradLoan === "Graduate PLUS Loan") {
           return 0.076;
         }
       }
@@ -139,7 +144,33 @@ export default {
       return this.principal * this.interestRateFactor * this.daysSincePayment;
     }
   },
-  methods: {}
+  methods: {
+    submitLoan() {
+      let loanData = [];
+      if (
+        this.programType === "Undergraduate" &&
+        this.selectedUndergradLoan !== ""
+      ) {
+        loanData.push(this.selectedUndergradLoan);
+      } else if (
+        this.programType === "Graduate" &&
+        this.selectedGradLoan !== ""
+      ) {
+        loanData.push(this.selectedGradLoan);
+      }
+
+      loanData.push(this.programType);
+      loanData.push(this.principal);
+      loanData.push(this.daysSincePayment);
+      loanData.push(this.interestRate);
+      loanData.push(this.interestRateFactor);
+      loanData.push(this.dailyInterestAmount);
+      loanData.push(this.totalInterestAmount);
+
+      // console.log(loanData);
+      this.$emit("loanData", loanData);
+    }
+  }
 };
 </script>
 
