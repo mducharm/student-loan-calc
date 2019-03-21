@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <NavbarComponent/>
+  <div id="app" class="is-clipped">
+    <NavbarComponent @about="aboutActive = true;"/>
     <div class="columns">
       <div class="column">
         <FormComponent @loan-data="addLoanData($event)"/>
@@ -9,6 +9,7 @@
         <LoanList :loans="loans"/>
       </div>
     </div>
+    <About :class="{'is-active': aboutActive}" @close-about="aboutActive = false;"/>
   </div>
 </template>
 
@@ -28,7 +29,8 @@ export default {
   },
   data() {
     return {
-      loans: []
+      loans: [],
+      aboutActive: false
     };
   },
   methods: {

@@ -27,7 +27,7 @@
       <div class="navbar-start"></div>
 
       <div class="navbar-end">
-        <a class="navbar-item">About</a>
+        <a class="navbar-item" @click="$emit('about')">About</a>
       </div>
     </div>
   </nav>

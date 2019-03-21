@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div class="box">
+    <!-- <div class="box">
       <article class="media">
         <div class="media-content">
           <div class="content">
@@ -50,7 +50,7 @@
           <span class="tag is-info">6.6%</span>
         </div>
       </article>
-    </div>
+    </div>-->
   </div>
 </template>
 
