@@ -3,11 +3,9 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="#">
         <h1 class="box logo is-size-3">$</h1>
-        <!-- <img src="@/assets/android-chrome-512x512.png" alt="Dollar Sign Logo"> -->
       </a>
       <div class="navbar-item">
         <h4 class="title is-4 logo-text">Student Loan Calculator</h4>
-        <!-- <i class="fas fa-chart-bar has-text-success is-size-1"></i> -->
       </div>
 
       <a
@@ -16,6 +14,8 @@
         aria-label="menu"
         aria-expanded="false"
         data-target="navbarBasicExample"
+        @click="toggleNavMenu()"
+        v-bind:class="{'is-active':navMenuActive}"
       >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -23,50 +23,33 @@
       </a>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu"></div>
+    <div id="navbarBasicExample" class="navbar-menu" v-bind:class="{'is-active':navMenuActive}">
+      <div class="navbar-start"></div>
 
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="navbar-start">
-          <a class="navbar-item">About</a>
-
-          <a class="navbar-item">Presets</a>
-
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">More</a>
-          </div>
-        </div>
+      <div class="navbar-end">
+        <a class="navbar-item">About</a>
       </div>
     </div>
-
-    <!-- <div class="navbar-brand">
-      <a href="#" class="navbar-item">
-        <span class="icon">
-          <i class="fas fa-hand-holding-usd has-text-success is-size-1"></i>
-        </span>
-        <h2>Student Loan Calculator</h2>
-      </a>
-      <a
-        role="button"
-        class="navbar-burger burger"
-        aria-label="menu"
-        aria-expanded="false"
-        data-target="navbarBasicExample"
-      >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-      <div class="navbar-menu">
-
-      </div>
-    </div>-->
   </nav>
 </template>
 
 <script>
 export default {
-  name: "NavbarComponent"
+  name: "NavbarComponent",
+  data() {
+    return {
+      navMenuActive: false
+    };
+  },
+  methods: {
+    toggleNavMenu() {
+      if (this.navMenuActive) {
+        this.navMenuActive = false;
+      } else {
+        this.navMenuActive = true;
+      }
+    }
+  }
 };
 </script>
 <style scoped>
