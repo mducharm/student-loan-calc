@@ -68,13 +68,16 @@
           </div>
         </div>
       </div>
-      <div class="tile is-parent">
+      <div class="tile is-parent is-vertical">
         <div class="tile is-child">
           <!-- Results -->
           <div v-show="formComplete">
-            <p>Your loans would accrue {{dailyInterestAmount}} per day. Over {{daysSincePayment}} days, your loans would accrue a total of {{totalInterestAmount}}.</p>
-            <button class="button is-primary">Add to List</button>
+            <p>At an interest rate of {{Math.round(interestRate * 1000)/10}}%, your loans would accrue ${{Math.round(dailyInterestAmount * 100) / 100}} per day.</p>
+            <p>Over {{daysSincePayment}} days, your loans would accrue a total of ${{Math.round(totalInterestAmount*100)/100}}.</p>
           </div>
+        </div>
+        <div v-show="formComplete" class="tile is-child">
+          <button class="button is-primary">Add to List</button>
         </div>
       </div>
     </div>

@@ -4,8 +4,6 @@
       <a class="navbar-item" href="#">
         <h1 class="box logo is-size-3">$</h1>
         <!-- <img src="@/assets/android-chrome-512x512.png" alt="Dollar Sign Logo"> -->
-        
-        
       </a>
       <div class="navbar-item">
         <h4 class="title is-4 logo-text">Student Loan Calculator</h4>
@@ -31,7 +29,7 @@
       <div class="navbar-item">
         <div class="navbar-start">
           <a class="navbar-item">About</a>
-          
+
           <a class="navbar-item">Presets</a>
 
           <div class="navbar-item has-dropdown is-hoverable">
@@ -73,10 +71,10 @@ export default {
 </script>
 <style scoped>
 .logo {
-  background-color: #4B8;
-  color: #FFF;
+  background-color: #4b8;
+  color: #fff;
   border-radius: 5px;
-  font-family: 'Leckerli One', cursive;
+  font-family: "Leckerli One", cursive;
   padding-top: 0;
   padding-bottom: 0;
   padding-right: 15px;
@@ -85,6 +83,11 @@ export default {
 
 .logo-text {
   /* font-family: 'Fredoka One', cursive; */
-font-family: 'Fredericka the Great', cursive;
+  /* font-family: "Fredericka the Great", cursive; */
+  font-family: "Lobster", cursive;
+}
+
+.navbar {
+  margin-bottom: 10px;
 }
 </style>

@@ -1,26 +1,37 @@
 <template>
   <div id="app">
-    <NavbarComponent />
+    <NavbarComponent/>
     <div class="columns">
-      <div class="column"><FormComponent /></div>
-      <div class="column"><LoanList /></div>
+      <div class="column">
+        <FormComponent/>
+      </div>
+      <div class="column">
+        <LoanList :loans="loans"/>
+      </div>
     </div>
-    
   </div>
 </template>
 
 <script>
-import FormComponent from './components/FormComponent.vue'
-import NavbarComponent from './components/NavbarComponent.vue'
-import About from './components/About.vue'
-import LoanList from './components/LoanList.vue'
+import FormComponent from "./components/FormComponent.vue";
+import NavbarComponent from "./components/NavbarComponent.vue";
+import About from "./components/About.vue";
+import LoanList from "./components/LoanList.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    FormComponent, NavbarComponent, About, LoanList
+    FormComponent,
+    NavbarComponent,
+    About,
+    LoanList
+  },
+  data() {
+    return {
+      loans: []
+    };
   }
-}
+};
 </script>
 
 <style>
