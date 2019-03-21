@@ -3,7 +3,7 @@
     <NavbarComponent/>
     <div class="columns">
       <div class="column">
-        <FormComponent/>
+        <FormComponent @loan-data="addLoanData($event)"/>
       </div>
       <div class="column">
         <LoanList :loans="loans"/>
@@ -30,6 +30,12 @@ export default {
     return {
       loans: []
     };
+  },
+  methods: {
+    addLoanData(loanData) {
+      this.loans.push(loanData);
+      // console.log(loanData);
+    }
   }
 };
 </script>

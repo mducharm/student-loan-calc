@@ -167,8 +167,7 @@ export default {
       loanData.push(this.dailyInterestAmount);
       loanData.push(this.totalInterestAmount);
 
-      // console.log(loanData);
-      this.$emit("loanData", loanData);
+      this.$emit("loan-data", loanData);
     }
   }
 };
