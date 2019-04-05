@@ -5,4 +5,3 @@ When borrowing federal student loans, it's difficult to keep track of how much i
 # Features
 * Fill in the required information to see your interest rates, loan origination fees, and estimated costs over time.
 * Add multiple loans for long-term planning of your degree's costs.
-* View examples of pre-made plans based on 2- and 4-year degrees.
